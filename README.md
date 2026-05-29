@@ -23,9 +23,11 @@ O objetivo do projeto é permitir a exploração interativa do relevo da Lua uti
 
 ## 🚀 Como executar o projeto
 
-Este projeto precisa ser executado utilizando um servidor local, pois o navegador bloqueia o carregamento de arquivos JSON locais usando `fetch()`.
+Acesse o link: [https://felipesantosribas.github.io/moon-project/](https://felipesantosribas.github.io/moon-project/)
 
-A forma mais simples é utilizando a extensão **Live Server** no VS Code.
+Ou
+
+Execute pelo VS Code utilizando a extensão **Live Server**.
 
 ### Passos
 
