@@ -16,11 +16,13 @@ scene.background = skyTexture;
 
 // --
 
-const skyGeometry = new THREE.SphereGeometry(10000, 64, 64);
+const skyGeometry = new THREE.SphereGeometry(10000, 16, 16);
 
 const skyMaterial = new THREE.MeshBasicMaterial({
   map: skyTexture,
-  side: THREE.BackSide
+  side: THREE.BackSide,
+  depthWrite: false,
+  fog: false
 });
 
 skyTexture.colorSpace = THREE.SRGBColorSpace;
@@ -33,7 +35,7 @@ scene.add(skySphere);
 
 const earthTexture = textureLoader.load('./textures/earth.jpg');
 
-const earthGeometry = new THREE.SphereGeometry(8, 32, 32);
+const earthGeometry = new THREE.SphereGeometry(64, 32, 32);
 
 const earthMaterial = new THREE.MeshPhongMaterial({
   map: earthTexture,
@@ -43,7 +45,7 @@ const earthMaterial = new THREE.MeshPhongMaterial({
 
 const earth = new THREE.Mesh(earthGeometry, earthMaterial);
 
-earth.position.set(-500, 50, 500);
+earth.position.set(-600, 50, 600);
 
 scene.add(earth);
 
@@ -73,7 +75,7 @@ const sunMaterial = new THREE.MeshBasicMaterial({
 
 const sun = new THREE.Mesh(sunGeometry, sunMaterial);
 
-sun.position.set(500, 300, -900);
+sun.position.set(500, 300, -700);
 
 scene.add(sun);
 
@@ -354,6 +356,8 @@ animate();
 function animate() {
 
   requestAnimationFrame(animate);
+
+  skySphere.position.copy(camera.position);
 
   camera.position.x =
     Math.sin(cameraAngleX)
