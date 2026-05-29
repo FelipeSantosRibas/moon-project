@@ -43,7 +43,7 @@ const earthMaterial = new THREE.MeshPhongMaterial({
 
 const earth = new THREE.Mesh(earthGeometry, earthMaterial);
 
-earth.position.set(-100, 30, -100);
+earth.position.set(-500, 50, 500);
 
 scene.add(earth);
 
@@ -73,7 +73,7 @@ const sunMaterial = new THREE.MeshBasicMaterial({
 
 const sun = new THREE.Mesh(sunGeometry, sunMaterial);
 
-sun.position.set(-100, 50, -600);
+sun.position.set(500, 300, -900);
 
 scene.add(sun);
 
@@ -171,7 +171,8 @@ const height = terrain[0].length;
 
 let terrainMesh = null;
 
-const CHUNK_SIZE = 256;
+const CHUNK_HEIGHT = 256;
+const CHUNK_WIDTH = 128;
 
 let chunkX = 0;
 let chunkY = 0;
@@ -194,8 +195,8 @@ function generateChunk(startX, startY) {
   const geometry = new THREE.PlaneGeometry(
     300,
     300,
-    CHUNK_SIZE - 1,
-    CHUNK_SIZE - 1
+    CHUNK_WIDTH - 1,
+    CHUNK_HEIGHT - 1
   );
 
   const uvs = geometry.attributes.uv;
@@ -204,8 +205,10 @@ function generateChunk(startX, startY) {
 
   for (let i = 0; i < vertices.count; i++) {
 
-    const localX = i % CHUNK_SIZE;
-    const localY = Math.floor(i / CHUNK_SIZE);
+    const localX = i % CHUNK_WIDTH;
+
+  const localY =
+    Math.floor(i / CHUNK_WIDTH);
 
     const mapX =
     (startX + localX + terrain.length)
@@ -223,14 +226,16 @@ function generateChunk(startX, startY) {
 
     let h = terrain[mapX][mapY];
 
-    vertices.setZ(i, h / 20);
+    vertices.setZ(i, h / 15);
 
   }
 
   for (let i = 0; i < uvs.count; i++) {
 
-  const localX = i % CHUNK_SIZE;
-  const localY = Math.floor(i / CHUNK_SIZE);
+  const localX = i % CHUNK_WIDTH;
+
+  const localY =
+    Math.floor(i / CHUNK_WIDTH);
 
   const mapX = startX + localX;
   const mapY = startY + localY;
@@ -291,12 +296,12 @@ function updateMinimap() {
 
   // tamanho EXATO do chunk
   const w =
-    (CHUNK_SIZE / mapWidth)
-    * minimapWidth;
+  (CHUNK_WIDTH / mapWidth)
+  * minimapWidth;
 
-  const h =
-    (CHUNK_SIZE / mapHeight)
-    * minimapHeight;
+const h =
+  (CHUNK_HEIGHT / mapHeight)
+  * minimapHeight;
 
   viewport.style.left = `${x}px`;
 
@@ -420,11 +425,11 @@ window.addEventListener('keydown', (event) => {
   }
 
   if (event.key === 'ArrowRight') {
-    chunkX += 20;
+    chunkX += 10;
   }
 
   if (event.key === 'ArrowLeft') {
-    chunkX -= 20;
+    chunkX -= 10;
   }
 
   generateChunk(chunkX, chunkY);
