@@ -1,0 +1,44 @@
+body {
+  margin: 0;
+  overflow: hidden;
+}
+
+#minimap-container {
+
+  position: absolute;
+
+  top: 20px;
+  right: 20px;
+
+  width: 220px;
+  height: 220px;
+
+  border: 2px solid white;
+
+  overflow: hidden;
+
+  z-index: 100;
+}
+
+#minimap {
+
+  width: 100%;
+  height: 100%;
+
+  object-fit: cover;
+
+  user-select: none;
+}
+
+#viewport {
+
+  position: absolute;
+
+  border: 2px solid red;
+
+  background: rgba(255,0,0,0.15);
+
+  pointer-events: none;
+
+  box-sizing: border-box;
+}

@@ -165,6 +165,11 @@ const CHUNK_SIZE = 128;
 let chunkX = 0;
 let chunkY = 0;
 
+const viewport =
+  document.getElementById('viewport');
+
+const minimapSize = 220;
+
 function generateChunk(startX, startY) {
 
   // remove chunk antigo
@@ -247,6 +252,47 @@ function generateChunk(startX, startY) {
   terrainMesh.castShadow = true;
 
   scene.add(terrainMesh);
+
+}
+
+function updateMinimap() {
+
+  const mapWidth = terrain.length;
+  const mapHeight = terrain[0].length;
+
+  // posição EXATA do chunk
+  const wrappedX =
+  ((chunkX % mapWidth) + mapWidth)
+  % mapWidth;
+
+    const wrappedY =
+    ((chunkY % mapHeight) + mapHeight)
+    % mapHeight;
+
+    const x =
+    (wrappedX / mapWidth)
+    * minimapSize;
+
+    const y =
+    (wrappedY / mapHeight)
+    * minimapSize;
+
+  // tamanho EXATO do chunk
+  const w =
+    (CHUNK_SIZE / mapWidth)
+    * minimapSize;
+
+  const h =
+    (CHUNK_SIZE / mapHeight)
+    * minimapSize;
+
+  viewport.style.left = `${x}px`;
+
+  viewport.style.top = `${y}px`;
+
+  viewport.style.width = `${w}px`;
+
+  viewport.style.height = `${h}px`;
 
 }
 
@@ -370,6 +416,8 @@ window.addEventListener('keydown', (event) => {
   }
 
   generateChunk(chunkX, chunkY);
+
+  updateMinimap();
   
 
 });
