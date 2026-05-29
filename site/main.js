@@ -260,22 +260,92 @@ camera.lookAt(
 
 // ----------------------------------
 
+let isDragging = false;
+
+let previousMousePosition = {
+  x: 0,
+  y: 0
+};
+
+let cameraAngleX = 0;
+let cameraAngleY = 0;
+
+let cameraDistance = 120;
+
 animate();
 
 function animate() {
+
   requestAnimationFrame(animate);
 
-  //controls.update();
+  camera.position.x =
+    Math.sin(cameraAngleX)
+    * cameraDistance;
+
+  camera.position.z =
+    Math.cos(cameraAngleX)
+    * cameraDistance;
+
+  camera.position.y =
+    40 + Math.sin(cameraAngleY) * 80;
+
+  camera.lookAt(0, 0, 0);
 
   renderer.render(scene, camera);
+
 }
 
 
 
 // Controles Mouse
 
+window.addEventListener('mousedown', (event) => {
+
+  if (event.button === 0) {
+
+    isDragging = true;
+
+    previousMousePosition = {
+      x: event.clientX,
+      y: event.clientY
+    };
+
+  }
+
+});
 
 
+window.addEventListener('mouseup', () => {
+
+  isDragging = false;
+
+});
+
+window.addEventListener('mousemove', (event) => {
+
+  if (!isDragging) return;
+
+  const deltaX =
+    event.clientX - previousMousePosition.x;
+
+  const deltaY =
+    event.clientY - previousMousePosition.y;
+
+  cameraAngleX += deltaX * 0.005;
+
+  cameraAngleY += deltaY * 0.005;
+
+  cameraAngleY = Math.max(
+    -1.4,
+    Math.min(1.4, cameraAngleY)
+  );
+
+  previousMousePosition = {
+    x: event.clientX,
+    y: event.clientY
+  };
+
+});
 
 
 
@@ -306,7 +376,12 @@ window.addEventListener('keydown', (event) => {
 
 window.addEventListener('wheel', (event) => {
 
-  camera.position.y += event.deltaY * 0.01;
+  cameraDistance += event.deltaY * 0.05;
+
+    cameraDistance = Math.max(
+    20,
+    Math.min(300, cameraDistance)
+    );
 
 });
 
