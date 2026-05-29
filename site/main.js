@@ -75,7 +75,7 @@ const sunMaterial = new THREE.MeshBasicMaterial({
 
 const sun = new THREE.Mesh(sunGeometry, sunMaterial);
 
-sun.position.set(500, 300, -700);
+sun.position.set(500, 100, -700);
 
 scene.add(sun);
 
