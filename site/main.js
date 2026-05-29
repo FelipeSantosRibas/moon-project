@@ -152,7 +152,7 @@ scene.fog = new THREE.Fog(0x000000, 200, 700);
 
 // ---------------------------------- Lua
 
-const moonTexture = textureLoader.load('./textures/moon.jpg');
+const moonTexture = textureLoader.load('./textures/moon-8k.jpg');
 
 moonTexture.colorSpace = THREE.SRGBColorSpace;
 
@@ -162,13 +162,16 @@ moonTexture.magFilter = THREE.NearestFilter;
 
 moonTexture.generateMipmaps = false;
 
+moonTexture.anisotropy =
+  renderer.capabilities.getMaxAnisotropy();
+
 // tamanho do mapa
 const width = terrain.length;
 const height = terrain[0].length;
 
 let terrainMesh = null;
 
-const CHUNK_SIZE = 128;
+const CHUNK_SIZE = 256;
 
 let chunkX = 0;
 let chunkY = 0;
@@ -176,7 +179,8 @@ let chunkY = 0;
 const viewport =
   document.getElementById('viewport');
 
-const minimapSize = 220;
+const minimapWidth = 320;
+const minimapHeight = 160;
 
 function generateChunk(startX, startY) {
 
@@ -219,7 +223,7 @@ function generateChunk(startX, startY) {
 
     let h = terrain[mapX][mapY];
 
-    vertices.setZ(i, h / 100);
+    vertices.setZ(i, h / 20);
 
   }
 
@@ -279,20 +283,20 @@ function updateMinimap() {
 
     const x =
     (wrappedX / mapWidth)
-    * minimapSize;
+    * minimapWidth;
 
     const y =
     (wrappedY / mapHeight)
-    * minimapSize;
+    * minimapHeight;
 
   // tamanho EXATO do chunk
   const w =
     (CHUNK_SIZE / mapWidth)
-    * minimapSize;
+    * minimapWidth;
 
   const h =
     (CHUNK_SIZE / mapHeight)
-    * minimapSize;
+    * minimapHeight;
 
   viewport.style.left = `${x}px`;
 
