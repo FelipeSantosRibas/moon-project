@@ -10,7 +10,7 @@ const scene = new THREE.Scene();
 
 const textureLoader = new THREE.TextureLoader();
 
-const skyTexture = textureLoader.load('./textures/stars.jpg');
+const skyTexture = textureLoader.load('textures/stars.jpg');
 
 scene.background = skyTexture;
 
@@ -33,7 +33,7 @@ scene.add(skySphere);
 
 // Terra
 
-const earthTexture = textureLoader.load('./textures/earth.jpg');
+const earthTexture = textureLoader.load('textures/earth.jpg');
 
 const earthGeometry = new THREE.SphereGeometry(64, 32, 32);
 
@@ -65,7 +65,7 @@ scene.add(earthGlow);
 
 // Sol
 
-const sunTexture = textureLoader.load('./textures/sun.jpg');
+const sunTexture = textureLoader.load('textures/sun.jpg');
 
 const sunGeometry = new THREE.SphereGeometry(20, 32, 32);
 
@@ -144,7 +144,7 @@ light.position.set(50, 50, 50);
 
 scene.add(light);
 
-const response = await fetch('./data/terrain.json');
+const response = await fetch('data/terrain.json');
 
 const terrain = await response.json();
 
@@ -161,7 +161,7 @@ scene.fog = new THREE.Fog(0x000000, 200, 700);
 
 // ---------------------------------- Lua
 
-const moonTexture = textureLoader.load('./textures/moon-8k.jpg');
+const moonTexture = textureLoader.load('textures/moon-8k.jpg');
 
 moonTexture.colorSpace = THREE.SRGBColorSpace;
 
