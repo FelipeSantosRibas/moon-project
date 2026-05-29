@@ -32,3 +32,4 @@ with open("../data/terrain.json", "w") as f:
     json.dump(crop.tolist(), f)
 
 print("terrain.json criado!")
+print(heightmap.shape)

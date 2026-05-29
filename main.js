@@ -161,7 +161,7 @@ scene.fog = new THREE.Fog(0x000000, 200, 700);
 
 // ---------------------------------- Lua
 
-const moonTexture = textureLoader.load('textures/moon-8k.jpg');
+const moonTexture = textureLoader.load('textures/moon-8k-2.jpg');
 
 moonTexture.colorSpace = THREE.SRGBColorSpace;
 
@@ -175,8 +175,8 @@ moonTexture.anisotropy =
   renderer.capabilities.getMaxAnisotropy();
 
 // tamanho do mapa
-const width = terrain.length;
-const height = terrain[0].length;
+const width = terrain[0].length;
+const height = terrain.length;
 
 let terrainMesh = null;
 
@@ -228,14 +228,14 @@ function generateChunk(startX, startY) {
     Math.floor(i / CHUNK_WIDTH);
 
     const mapX =
-    wrap(startX + localX, terrain.length);
+    wrap(startX + localX, terrain[0].length);
 
     const mapY =
-   wrap(startY + localY, terrain[0].length);
+   wrap(startY + localY, terrain.length);
 
     
 
-    let h = terrain[mapX][mapY];
+    let h = terrain[mapY][mapX];
 
     vertices.setZ(i, h / 15);
 
@@ -255,8 +255,8 @@ function generateChunk(startX, startY) {
   wrap(startY + localY, terrain[0].length);
 
   // UV global
-  const u = mapX / terrain.length;
-  const v = 1 -(mapY / terrain[0].length);
+  const u = mapX / terrain[0].length;
+  const v = 1 -(mapY / terrain.length);
 
   uvs.setXY(i, u, v);
 
@@ -288,8 +288,8 @@ function generateChunk(startX, startY) {
 
 function updateMinimap() {
 
-  const mapWidth = terrain.length;
-  const mapHeight = terrain[0].length;
+  const mapWidth = terrain[0].length;
+  const mapHeight = terrain.length;
 
   // posição EXATA do chunk
   const wrappedX =
