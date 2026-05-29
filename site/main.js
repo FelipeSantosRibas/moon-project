@@ -183,8 +183,9 @@ let terrainMesh = null;
 let CHUNK_HEIGHT = 256;
 let CHUNK_WIDTH = 128;
 
-let chunkX = 0;
-let chunkY = 0;
+let chunkX = Math.floor(terrain.length / 2);
+
+let chunkY = Math.floor(terrain[0].length / 2);
 
 const viewport =
   document.getElementById('viewport');
@@ -326,7 +327,7 @@ const h =
 
 }
 
-generateChunk(0, 0);
+generateChunk(chunkX, chunkY);
 
 camera.lookAt(
   terrainMesh.position.x,
@@ -474,28 +475,38 @@ window.addEventListener('mousemove', (event) => {
 
 // Controles Teclado
 
+const keys = {};
+
 window.addEventListener('keydown', (event) => {
 
-  if (event.key === 'ArrowUp') {
+  keys[event.key] = true;
+
+  if (keys['ArrowUp'] || keys['w']) {
     chunkY -= 20;
   }
 
-  if (event.key === 'ArrowDown') {
+  if (keys['ArrowDown'] || keys['s']) {
     chunkY += 20;
   }
 
-  if (event.key === 'ArrowRight') {
+  if (keys['ArrowRight'] || keys['d']) {
     chunkX += 10;
   }
 
-  if (event.key === 'ArrowLeft') {
+  if (keys['ArrowLeft'] || keys['a']) {
     chunkX -= 10;
   }
 
   generateChunk(chunkX, chunkY);
 
   updateMinimap();
-  
+
+});
+
+
+window.addEventListener('keyup', (event) => {
+
+  keys[event.key] = false;
 
 });
 
