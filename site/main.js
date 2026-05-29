@@ -171,8 +171,8 @@ const height = terrain[0].length;
 
 let terrainMesh = null;
 
-const CHUNK_HEIGHT = 256;
-const CHUNK_WIDTH = 128;
+let CHUNK_HEIGHT = 256;
+let CHUNK_WIDTH = 128;
 
 let chunkX = 0;
 let chunkY = 0;
@@ -334,6 +334,20 @@ let cameraAngleX = 0;
 let cameraAngleY = 0;
 
 let cameraDistance = 120;
+
+
+window.changeChunkSize = function(size) {
+
+  CHUNK_HEIGHT = size;
+
+  CHUNK_WIDTH = Math.floor(size / 2);
+
+  generateChunk(chunkX, chunkY);
+
+  updateMinimap();
+
+}
+
 
 animate();
 

@@ -1,6 +1,148 @@
 body {
+
   margin: 0;
   overflow: hidden;
+
+  font-family: Arial, sans-serif;
+
+  color: white;
+}
+
+
+/* Título */
+
+#top-ui {
+
+  position: absolute;
+
+  top: 20px;
+  left: 50%;
+
+  transform: translateX(-50%);
+
+  text-align: center;
+
+  z-index: 100;
+
+  pointer-events: none;
+}
+
+#top-ui h1 {
+
+  margin: 0;
+
+  font-size: 42px;
+  font-weight: bold;
+
+  letter-spacing: 2px;
+}
+
+#top-ui p {
+
+  margin-top: 5px;
+
+  font-size: 16px;
+
+  opacity: 0.8;
+}
+
+
+/* Controles */
+
+#controls-ui {
+
+  position: absolute;
+
+  left: 20px;
+  bottom: 20px;
+
+  width: 260px;
+
+  padding: 16px;
+
+  background: rgba(0,0,0,0.45);
+
+  border: 1px solid rgba(255,255,255,0.15);
+
+  border-radius: 10px;
+
+  backdrop-filter: blur(4px);
+
+  z-index: 100;
+}
+
+#controls-ui h2 {
+
+  margin-top: 0;
+
+  font-size: 20px;
+}
+
+#controls-ui p {
+
+  margin: 10px 0;
+
+  font-size: 14px;
+
+  opacity: 0.9;
+}
+
+
+/* Chunk UI */
+
+#chunk-ui {
+
+  position: absolute;
+
+  right: 20px;
+  bottom: 20px;
+
+  padding: 16px;
+
+  background: rgba(0,0,0,0.45);
+
+  border: 1px solid rgba(255,255,255,0.15);
+
+  border-radius: 10px;
+
+  backdrop-filter: blur(4px);
+
+  z-index: 100;
+}
+
+#chunk-ui h2 {
+
+  margin-top: 0;
+
+  font-size: 20px;
+}
+
+#chunk-ui button {
+
+  display: block;
+
+  width: 120px;
+
+  margin-top: 10px;
+
+  padding: 10px;
+
+  border: none;
+
+  border-radius: 8px;
+
+  background: rgba(255,255,255,0.1);
+
+  color: white;
+
+  cursor: pointer;
+
+  transition: 0.2s;
+}
+
+#chunk-ui button:hover {
+
+  background: rgba(255,255,255,0.2);
 }
 
 #minimap-container {
