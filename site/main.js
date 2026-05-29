@@ -127,9 +127,16 @@ light.position.set(-200, 100, -100);
 
 light.castShadow = true;
 
+light.shadow.mapSize.width = 2048;
+light.shadow.mapSize.height = 2048;
+
 scene.add(light);
 
-const ambient = new THREE.AmbientLight(0x404040, 0.5);
+const ambient =
+  new THREE.AmbientLight(
+    0x8899aa,
+    1.2
+  );
 
 scene.add(ambient);
 
@@ -160,7 +167,7 @@ moonTexture.colorSpace = THREE.SRGBColorSpace;
 
 moonTexture.minFilter = THREE.LinearFilter;
 
-moonTexture.magFilter = THREE.NearestFilter;
+//moonTexture.magFilter = THREE.NearestFilter;
 
 moonTexture.generateMipmaps = false;
 
@@ -337,6 +344,12 @@ let cameraAngleY = 0;
 
 let cameraDistance = 120;
 
+let introTime = 0;
+
+let autoRotate = true;
+
+let userInteracted = false;
+
 
 window.changeChunkSize = function(size) {
 
@@ -357,7 +370,30 @@ function animate() {
 
   requestAnimationFrame(animate);
 
+  // INTRO AUTOMÁTICA
+
+if (introTime < 3) {
+
+  introTime += 0.016;
+
+  cameraDistance +=
+  (150 - cameraDistance) * 0.01;
+
+  cameraAngleY +=
+  (1.5 - cameraAngleY) * 0.01;
+
+}
+
   skySphere.position.copy(camera.position);
+
+
+  // rotação automática
+
+if (autoRotate && !userInteracted) {
+
+  cameraAngleX += 0.0015;
+
+}
 
   camera.position.x =
     Math.sin(cameraAngleX)
@@ -392,6 +428,8 @@ window.addEventListener('mousedown', (event) => {
     };
 
   }
+
+  userInteracted = true;
 
 });
 
