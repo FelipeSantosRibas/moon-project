@@ -154,6 +154,14 @@ scene.fog = new THREE.Fog(0x000000, 200, 700);
 
 const moonTexture = textureLoader.load('./textures/moon.jpg');
 
+moonTexture.colorSpace = THREE.SRGBColorSpace;
+
+moonTexture.minFilter = THREE.LinearFilter;
+
+moonTexture.magFilter = THREE.NearestFilter;
+
+moonTexture.generateMipmaps = false;
+
 // tamanho do mapa
 const width = terrain.length;
 const height = terrain[0].length;
@@ -211,7 +219,7 @@ function generateChunk(startX, startY) {
 
     let h = terrain[mapX][mapY];
 
-    vertices.setZ(i, h / 30);
+    vertices.setZ(i, h / 100);
 
   }
 
@@ -225,7 +233,7 @@ function generateChunk(startX, startY) {
 
   // UV global
   const u = mapX / terrain.length;
-  const v = mapY / terrain[0].length;
+  const v = 1 -(mapY / terrain[0].length);
 
   uvs.setXY(i, u, v);
 
