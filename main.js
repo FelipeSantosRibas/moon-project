@@ -144,7 +144,7 @@ light.position.set(50, 50, 50);
 
 scene.add(light);
 
-const response = await fetch('../data/terrain.json');
+const response = await fetch('./data/terrain.json');
 
 const terrain = await response.json();
 
