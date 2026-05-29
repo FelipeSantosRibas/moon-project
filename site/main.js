@@ -192,6 +192,13 @@ const viewport =
 const minimapWidth = 320;
 const minimapHeight = 160;
 
+
+function wrap(value, max) {
+
+  return ((value % max) + max) % max;
+
+}
+
 function generateChunk(startX, startY) {
 
   // remove chunk antigo
@@ -220,18 +227,12 @@ function generateChunk(startX, startY) {
     Math.floor(i / CHUNK_WIDTH);
 
     const mapX =
-    (startX + localX + terrain.length)
-    % terrain.length;
+    wrap(startX + localX, terrain.length);
 
     const mapY =
-    (startY + localY + terrain[0].length)
-    % terrain[0].length;
+   wrap(startY + localY, terrain[0].length);
 
-    // evita sair do mapa
-    if (
-      mapX >= terrain.length ||
-      mapY >= terrain[0].length
-    ) continue;
+    
 
     let h = terrain[mapX][mapY];
 
@@ -246,8 +247,11 @@ function generateChunk(startX, startY) {
   const localY =
     Math.floor(i / CHUNK_WIDTH);
 
-  const mapX = startX + localX;
-  const mapY = startY + localY;
+  const mapX =
+  wrap(startX + localX, terrain.length);
+
+  const mapY =
+  wrap(startY + localY, terrain[0].length);
 
   // UV global
   const u = mapX / terrain.length;
