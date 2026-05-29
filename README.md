@@ -8,7 +8,7 @@ O objetivo do projeto é permitir a exploração interativa do relevo da Lua uti
 
 ## 📸 Screenshot
 
-![Screenshot](data/screenshot.png)
+![Screenshot](data/screenshot.jpg)
 
 ---
 
