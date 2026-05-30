@@ -183,9 +183,18 @@ let terrainMesh = null;
 let CHUNK_HEIGHT = 256;
 let CHUNK_WIDTH = 256;
 
-let chunkX = Math.floor(terrain[0].length / 2);
+const centerX = terrain[0].length / 2;
+const centerY = terrain.length / 2;
 
-let chunkY = Math.floor(terrain.length / 2);
+let chunkX =
+  Math.floor(
+    centerX  * (0.5 + Math.random())
+  );
+
+let chunkY =
+  Math.floor(
+    centerY * (0.5 + Math.random())
+  );
 
 const viewport =
   document.getElementById('viewport');
@@ -284,6 +293,42 @@ function generateChunk(startX, startY) {
 
 }
 
+const minimap =
+  document.getElementById('minimap-container');
+
+minimap.addEventListener('click', (event) => {
+
+  const rect =
+    minimap.getBoundingClientRect();
+
+  const mouseX =
+    event.clientX - rect.left;
+
+  const mouseY =
+    event.clientY - rect.top;
+
+  const percentX =
+    mouseX / rect.width;
+
+  const percentY =
+    mouseY / rect.height;
+
+  chunkX =
+    Math.floor(
+      percentX * terrain[0].length
+    ) - CHUNK_WIDTH/2;
+
+  chunkY =
+    Math.floor(
+      percentY * terrain.length
+    ) - CHUNK_HEIGHT/2;
+
+  generateChunk(chunkX, chunkY);
+
+  updateMinimap();
+
+});
+
 function updateMinimap() {
 
   const mapWidth = terrain[0].length;
@@ -325,7 +370,13 @@ const h =
 
 }
 
-generateChunk(chunkX, chunkY);
+
+generateChunk(
+  Math.floor(chunkX),
+  Math.floor(chunkY)
+);
+
+updateMinimap();
 
 camera.lookAt(
   terrainMesh.position.x,
