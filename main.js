@@ -161,7 +161,7 @@ scene.fog = new THREE.Fog(0x000000, 200, 700);
 
 // ---------------------------------- Lua
 
-const moonTexture = textureLoader.load('textures/moon-8k-2.jpg');
+const moonTexture = textureLoader.load('textures/moon-8k.jpg');
 
 moonTexture.colorSpace = THREE.SRGBColorSpace;
 
@@ -249,17 +249,15 @@ function generateChunk(startX, startY) {
     Math.floor(i / CHUNK_WIDTH);
 
   const mapX =
-  wrap(startX + localX, terrain.length);
+  wrap(startX + localX, terrain[0].length);
 
   const mapY =
-  wrap(startY + localY, terrain[0].length);
+    wrap(startY + localY, terrain.length);
 
-  // UV global
   const u = mapX / terrain[0].length;
-  const v = 1 -(mapY / terrain.length);
+  const v = 1 - (mapY / terrain.length);
 
   uvs.setXY(i, u, v);
-
   }
 
   uvs.needsUpdate = true;
