@@ -181,11 +181,11 @@ const height = terrain.length;
 let terrainMesh = null;
 
 let CHUNK_HEIGHT = 256;
-let CHUNK_WIDTH = 128;
+let CHUNK_WIDTH = 256;
 
-let chunkX = Math.floor(terrain.length / 2);
+let chunkX = Math.floor(terrain[0].length / 2);
 
-let chunkY = Math.floor(terrain[0].length / 2);
+let chunkY = Math.floor(terrain.length / 2);
 
 const viewport =
   document.getElementById('viewport');
@@ -358,7 +358,7 @@ window.changeChunkSize = function(size) {
 
   CHUNK_HEIGHT = size;
 
-  CHUNK_WIDTH = Math.floor(size / 2);
+  CHUNK_WIDTH = size;
 
   generateChunk(chunkX, chunkY);
 
